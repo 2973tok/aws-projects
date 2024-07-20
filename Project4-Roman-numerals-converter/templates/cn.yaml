@@ -8,21 +8,17 @@ Description: |
   Roman Numerals Converter Application is downloaded from Github repository, then installed on Flask.
 
 Parameters:
-  
   KeyName:
    Description: Enter your keyname
    Type: AWS::EC2::KeyPair::KeyName
-  
   LatestAmiId:
    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
    Default:  '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
 
 Resources:
-  
   ConverterSecGrp:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      
       GroupDescription: Enable http and ssh (80 and 22 port)
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
@@ -36,14 +32,13 @@ Resources:
   
   ConverterInstance:
     Type: AWS::EC2::Instance
-    
     Properties:
       ImageId: !Ref LatestAmiId
       InstanceType: t2.micro
       KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref ConverterSecGrp
-      
+
       Tags:
         - Key: Name
           Value: !Sub Web Server of ${AWS::StackName}
