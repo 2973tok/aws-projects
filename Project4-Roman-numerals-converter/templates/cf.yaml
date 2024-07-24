@@ -6,7 +6,7 @@ Parameters:
   myAmiId: 
     Description: Latest version
     Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
-    Default: '/aws/service/ami-amazon-linux-latest/al2023-ami-minimal-kernel-default-x86_64'
+    Default: '/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64' # '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
 
   myKey:
     Description: Enter your keypair
@@ -36,11 +36,11 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+
   myEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: !Ref myKey
-    
       ImageId: !Ref myAmiId
       InstanceType: !Ref myInstance
      
@@ -61,7 +61,6 @@ Resources:
         wget https://raw.githubusercontent.com/2973tok/aws-projects/main/Project4-Roman-numerals-converter/app.py
         python3 app.py
         
-  
 Outputs:
   WebsiteURL:
     Value: !Sub http://${myEC2Instance.PublicIp}
