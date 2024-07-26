@@ -1,22 +1,18 @@
 # Import Flask modules
 from flask import Flask, render_template, request
 from flaskext.mysql import MySQL
-from decouple import config
+
 
 
 # Create an object named app
 app = Flask(__name__)
 
 # Configure mysql database
-app.config['MYSQL_DATABASE_HOST'] = config('MYSQL_DATABASE_HOST')
-app.config['MYSQL_DATABASE_USER'] = config('MYSQL_DATABASE_USER')
-app.config['MYSQL_DATABASE_PASSWORD'] = config('MYSQL_DATABASE_PASSWORD')
-app.config['MYSQL_DATABASE_DB'] = config('MYSQL_DATABASE_DB')
-app.config['MYSQL_DATABASE_PORT'] = int(config('MYSQL_DATABASE_PORT'))
-# mysql_port_str = config('MYSQL_DATABASE_PORT')
-# mysql_port = int(mysql_port_str)
-# app.config['MYSQL_DATABASE_PORT'] = mysql_port
-
+app.config['MYSQL_DATABASE_HOST'] = 'kodal-flask-05.cbanmzptkrzf.us-east-1.rds.amazonaws.com'
+app.config['MYSQL_DATABASE_USER'] = 'admin'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Clarusway_1'
+app.config['MYSQL_DATABASE_DB'] = 'clarusway'
+app.config['MYSQL_DATABASE_PORT'] = 3306
 mysql = MySQL()
 mysql.init_app(app)
 connection = mysql.connect()
@@ -109,5 +105,5 @@ def add_email():
 
 # Add a statement to run the Flask application which can be reached from any host on port 80.
 if __name__ == '__main__':
-#    app.run(debug=True)
-   app.run(host='0.0.0.0', port=80)
+     app.run(debug=True)
+#    app.run(host='0.0.0.0', port=80)
